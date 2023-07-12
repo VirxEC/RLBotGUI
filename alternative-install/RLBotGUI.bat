@@ -11,7 +11,11 @@ set rl_pip="Python37\Scripts\pip.exe"
 if not exist %rl_py% (
   echo Looks like we're missing RLBot's Python ^(3.7.9^), installing...
 
-  powershell -command "Expand-Archive '%~dp0python-3.7.9-custom-amd64.zip' '%LocalAppData%\RLBotGUIX\Python37'"
+  if not exist "python-3.7.9-custom-amd64.zip" (
+    curl https://virxec.github.io/rlbot_gui_rust/python-3.7.9-custom-amd64.zip -o python-3.7.9-custom-amd64.zip
+  )
+
+  powershell -command "Expand-Archive '%LocalAppData%\RLBotGUIX\python-3.7.9-custom-amd64.zip' '%LocalAppData%\RLBotGUIX\Python37'"
 )
 
 rem We ping google.com to see if we have an internet connection
